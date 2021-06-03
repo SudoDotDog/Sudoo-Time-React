@@ -25,7 +25,9 @@ export const useInterval = (intervalFunction: IntervalFunction, interval: number
 
         const timer = setInterval(() => {
 
-            if (typeof refIntervalFunction.current === 'function') {
+            if (typeof refIntervalFunction.current
+                === 'function') {
+
                 refIntervalFunction.current();
             }
         }, interval);
@@ -34,5 +36,6 @@ export const useInterval = (intervalFunction: IntervalFunction, interval: number
 
             clearInterval(timer);
         }
+
     }, [interval]);
 };
