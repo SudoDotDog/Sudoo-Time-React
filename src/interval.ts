@@ -5,14 +5,29 @@
  */
 
 import * as React from "react";
+import { IntervalFunction } from "./declare";
 
-export const useIntervalTime = (interval: number, startTime: Date = new Date()) => {
+export const useIntervalTime = (intervalFunction: IntervalFunction, interval: number) => {
 
-    const startTimeValue: number = startTime.getTime();
+    const refIntervalFunction: React.MutableRefObject<IntervalFunction> = React.useRef();
 
     React.useEffect(() => {
 
-    }, [
-        startTimeValue,
-    ]);
+        refIntervalFunction.current = intervalFunction;
+    }, []);
+
+    React.useEffect(() => {
+
+        const timer = setInterval(() => {
+
+            if (typeof refIntervalFunction.current === 'function') {
+                refIntervalFunction.current();
+            }
+        });
+
+        return () => {
+
+            clearInterval(timer);
+        }
+    }, [interval]);
 };
