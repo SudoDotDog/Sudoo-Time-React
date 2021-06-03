@@ -7,7 +7,7 @@
 import * as React from "react";
 import { IntervalFunction } from "./declare";
 
-export const useInterval = (intervalFunction: IntervalFunction, interval: number) => {
+export const useInterval = (intervalFunction: IntervalFunction, interval: number | null) => {
 
     const refIntervalFunction: React.MutableRefObject<IntervalFunction> = React.useRef();
 
@@ -17,6 +17,11 @@ export const useInterval = (intervalFunction: IntervalFunction, interval: number
     }, []);
 
     React.useEffect(() => {
+
+        if (typeof interval !== 'number') {
+
+            return;
+        }
 
         const timer = setInterval(() => {
 
