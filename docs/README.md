@@ -14,3 +14,51 @@ yarn add @sudoo/time-react
 # Or
 npm install @sudoo/time-react --save
 ```
+
+## Usage
+
+```tsx
+import * as React from "react";
+import { useInterval } from "@sudoo/time-react";
+
+export const YourComponent: React.FC = () => {
+
+    const [value, setValue] = React.useState(0);
+
+    useInterval(() => {
+        setValue(value + 1);
+    }, 1000);
+
+    return (<div>
+        {value}
+    </div>)
+};
+```
+
+Change interval value to change it's speed, or pause it by set interval value to `null`;
+
+```tsx
+import * as React from "react";
+import { useInterval } from "@sudoo/time-react";
+
+export const YourComponent: React.FC = () => {
+
+    const [interval, setIntervalValue] = React.useState(1000);
+    const [value, setValue] = React.useState(0);
+
+    useInterval(() => {
+        setValue(value + 1);
+    }, interval);
+
+    return (<div>
+        {value}
+        <button 
+            onClick={() => {
+                setIntervalValue(null);
+            }}
+        >
+            Pause
+        </button>
+    </div>)
+};
+```
