@@ -9,7 +9,7 @@ import { IntervalFunction } from "./declare";
 
 export const useInterval = (intervalFunction: IntervalFunction, interval: number | null) => {
 
-    const refIntervalFunction: React.MutableRefObject<IntervalFunction> = React.useRef();
+    const refIntervalFunction: React.MutableRefObject<IntervalFunction | undefined> = React.useRef();
 
     React.useEffect(() => {
 
