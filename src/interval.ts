@@ -14,7 +14,7 @@ export const useInterval = (intervalFunction: IntervalFunction, interval: number
     React.useEffect(() => {
 
         refIntervalFunction.current = intervalFunction;
-    }, []);
+    }, [intervalFunction]);
 
     React.useEffect(() => {
 
@@ -28,7 +28,7 @@ export const useInterval = (intervalFunction: IntervalFunction, interval: number
             if (typeof refIntervalFunction.current === 'function') {
                 refIntervalFunction.current();
             }
-        });
+        }, interval);
 
         return () => {
 
